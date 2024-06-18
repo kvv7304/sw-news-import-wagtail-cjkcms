@@ -35,34 +35,7 @@
 
 ## Django Команды
 
-### `import_articles.py`
-
-Этот скрипт импортирует статьи в CMS на основе Wagtail. Основные функции включают:
-
-- **Скачивание изображений**: Загрузка и сохранение изображений по URL.
-- **Создание и публикация статей**: Создание и публикация новых статей с заданными параметрами.
-
-#### Пример использования:
-```sh
-python manage.py import_articles
-```
-
-### `parse_articles.py`
-
-Этот скрипт отвечает за парсинг и обработку новостей. Основные функции включают:
-
-- **Аутентификация**: Выполняет аутентификацию на сайте с использованием учетных данных.
-- **Получение данных**: Загрузка HTML-контента с целевого URL.
-- **Парсинг новостей**: Парсинг новостей с главной страницы и отдельных новостей.
-- **Обработка HTML**: Очистка HTML-контента от ненужных тегов и атрибутов.
-- **Транслитерация**: Преобразует русский текст в URL-слуг.
-
-#### Пример использования:
-```sh
-python manage.py parse_articles
-```
-
-## Основная функция для импорта новостей
+## Основная функция для импорта новостей add_main
 
 ### Описание
 
@@ -71,69 +44,3 @@ python manage.py parse_articles
 1. **Скачивание изображения**: Функция `download_and_save_image` загружает изображение по указанному URL и сохраняет его в Wagtail.
 2. **Создание и публикация статьи**: Функция `create_and_publish_article` создает новую статью, заполняет её содержимым и публикует на сайте.
 3. **Добавление контента**: Функция добавляет текст и многоразовый контент к статье, используя данные, полученные из парсинга.
-
-### Пример использования
-
-```python
-command_instance = Command()
-data_backoffice = backoffice_page_news_list()
-for data in reversed(data_backoffice):
-    try:
-        command_instance.handle(
-            title=data['title'],
-            slug=data['slug'],
-            url=data["body_url"],
-            caption=data['caption_tag'],
-            image_url=data['image_url'],
-            date_display=data['date_display'],
-            owner_username="kv7304",
-            parent_page_id=17,
-            custom_template="cjkcms/pages/web_page.html"
-        )
-    except ValidationError as e:
-        if 'slug' not in e.error_dict:
-            print(f"Ошибка в {data['title']}: {' '.join(message for messages in e.message_dict.values() for message in messages)}")
-        continue
-```
-
-## Установка
-
-### Предварительные требования
-
-- Docker
-- Docker Compose
-
-### Инструкция по установке
-
-1. Клонируйте репозиторий:
-   ```sh
-   git clone https://github.com/kvv7304/sw-news-import-wagtail-cjkcms.git
-   cd sw-news-import-wagtail-cjkcms
-   ```
-
-2. Постройте и запустите Docker контейнеры:
-   ```sh
-   docker-compose up --build
-   ```
-
-3. Откройте браузер и перейдите по адресу `http://localhost:8000`.
-
-### Запуск и остановка
-
-- Запуск сервера разработки:
-  ```sh
-  docker-compose up
-  ```
-
-- Остановка сервера разработки:
-  ```sh
-  docker-compose down
-  ```
-
-## Вклад в проект
-
-Мы приветствуем ваш вклад! Сделайте форк репозитория и создайте pull request с вашими изменениями.
-
-## Лицензия
-
-Этот проект лицензирован под лицензией MIT.
