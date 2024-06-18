@@ -1,0 +1,28 @@
+blockquote q {
+    font-style: italic;
+}
+
+blockquote {
+    border-left: 4px solid #00b3f0; /* задаем толщину, тип и цвет линии */
+    padding-left: 10px; /* добавляем отступ слева, чтобы текст не налезал на линию */
+}
+
+.btn-primary {
+  background-color: #00b3f0 !important;
+  border-color: #00b3f0 !important;
+}
+
+body, p, h1, h2, h3, h4, h5, h6, span, div {
+  color: #0c0925  !important; /* Задает цвет текста для всего сайта */
+}
+
+a {
+  color: #00b3f0; /* Цвет текста ссылки */
+  text-decoration: none; /* Убирает подчеркивание по умолчанию, если необходимо */
+}
+
+/* Цвет ссылки при наведении курсора */
+a:hover {
+  color: #00b3f0; /* Цвет текста ссылки при наведении */
+  text-decoration: underline; /* Добавляет подчеркивание при наведении, если необходимо */
+}

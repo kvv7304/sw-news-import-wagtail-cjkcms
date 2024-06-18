@@ -1,0 +1,9 @@
+anticaptchaofficial==1.0.60
+beautifulsoup4==4.12.3
+Django==5.0.6
+Pillow==10.3.0
+Requests==2.31.0
+wagtail==6.1
+html5lib
+lxml
+wagtail-cjkcms==24.5.*

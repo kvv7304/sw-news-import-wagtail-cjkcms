@@ -1,0 +1,20 @@
+version: '3'
+
+services:
+  web:
+    build: .
+    command: bash -c "cron && tail -f /var/log/cron.log & python3 manage.py runserver 0.0.0.0:8081"
+    ports:
+      - "8081:8081"
+    volumes:
+      - .:/app
+      - db-data:/django_app/db
+      - public-data:/django_app/public
+    environment:
+      - DEBUG=0
+      - TZ=Europe/Moscow  
+volumes:
+  db-data:
+    driver: local
+  public-data:
+    driver: local
