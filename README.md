@@ -26,15 +26,16 @@
 
 3. Настройте конфигурационные файлы:
    - В файле `config.py` укажите ваши данные для авторизации и ключи капчи.
-      ```Пример ключа капчи
-      CAPTCHA_KEY = "sample_captcha_key"
-      
-      Пример данных пользователя
-      USER = {
+   ```sh
+   Пример ключа капчи
+   CAPTCHA_KEY = "sample_captcha_key"
+   Пример данных пользователя
+   USER = {
           "number": "sample_number",
           "password": "sample_password"
-      }
-```
+   }
+   ```
+
 
 ## Использование
 
