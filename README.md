@@ -13,6 +13,30 @@
 
 Проект функционирует на сайте https://wellness.com.ru/
 
+## Установка и настройка
+
+1. Клонируйте репозиторий:
+   ```sh
+   git clone https://github.com/kvv7304/sw-news-import-wagtail-cjkcms.git
+   cd sw-news-import-wagtail-cjkcms
+   ```
+
+2. Установите зависимости:
+   ```sh
+   pip install -r requirements.txt
+   ```
+
+3. Настройте конфигурационные файлы, в файле `config.py` укажите ваши данные для авторизации и ключи капчи.
+   ```sh
+   Пример ключа капчи
+   CAPTCHA_KEY = "sample_captcha_key"
+   Пример данных пользователя
+   USER = {
+          "number": "sample_number",
+          "password": "sample_password"
+   }
+   ```
+
 ## Использование
 
 ### Основные команды
