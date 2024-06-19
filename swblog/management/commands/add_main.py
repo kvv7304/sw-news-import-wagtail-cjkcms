@@ -78,12 +78,6 @@ class Command(BaseCommand):
         new_article.body = StreamValue(new_article.body.stream_block, body, is_lazy=True)
         new_article.save_revision().publish()
 
-        response_data = {
-            "body": new_article.body,
-        }
-        print(response_data)
-
-
         if kwargs['image_url'] and new_article:
             image_url = kwargs['image_url']
             image_title = kwargs['slug'] + "." + image_url.split(".")[-1]

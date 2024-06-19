@@ -1,15 +1,19 @@
 from io import BytesIO
+
 import requests
 from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
 from django.core.files.images import ImageFile
 from django.core.management.base import BaseCommand
 from django.utils import timezone
+from wagtail.blocks import StreamValue
 from wagtail.images.models import Image
 from wagtail.models import Page
+from wagtail.blocks import StreamValue, RichTextBlock, StructBlock, PageChooserBlock
 
-from swblog.management.commands.backoffice import getting_old_news, backoffice_page_news
 from home.models import ProjectArticlePage
+from swblog.management.commands.backoffice import getting_old_news, backoffice_page_news
+
 
 def download_and_save_image(image_url, title):
     response = requests.get(image_url)
@@ -53,9 +57,28 @@ class Command(BaseCommand):
             custom_template=kwargs['custom_template'],
         )
 
-        body = [('text', f'<div class="block-text"><p data-block-key="8hxso">'
-                         f'{backoffice_page_news(kwargs["url"])}</p></div>')]
-        new_article.body = body
+
+        body = [
+            {
+                "type": "text",
+                "value": (
+                    f'<div class="block-text">'
+                    f'<p data-block-key="8hxso">'
+                    f'{backoffice_page_news(kwargs["url"])}'
+                    f'</p>'
+                    f'</div>'
+                )
+            },
+            {
+                "type": "reusable_content",
+                "value": {
+                    "settings": {"custom_id": "1"},
+                    "content": 1
+                }
+            }
+        ]
+
+        new_article.body = StreamValue(new_article.body.stream_block, body, is_lazy=True)
         new_article.save_revision().publish()
 
         if kwargs['image_url'] and new_article:

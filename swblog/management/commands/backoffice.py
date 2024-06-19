@@ -139,10 +139,6 @@ def clean_html_content(soup):
                     'sub', 'sup', 'code', 'kbd', 'samp', 'var', 'dd', 'dl', 'dt', 'figcaption', 'figure', 'abbr', 'q',
                     'cite', 'dfn', 'time' ]
 
-    # Удаляем комментарии
-    # for comment in soup.find_all(string=lambda text: isinstance(text, Comment)):
-    #     comment.extract()
-
     for tag in soup.find_all(True):
         if tag.name not in allowed_tags:
             tag.decompose()
